@@ -155,3 +155,14 @@ int elfrw_write_Syminfos(FILE *fp, Elf64_Syminfo const *out, int count)
 	    break;
     return i;
 }
+
+int elfrw_count_Syms(int size)
+{
+    return size / (is64bit_form() ? sizeof(Elf64_Sym) : sizeof(Elf32_Sym));
+}
+
+int elfrw_count_Syminfos(int size)
+{
+    return size / (is64bit_form() ? sizeof(Elf64_Syminfo)
+				  : sizeof(Elf32_Syminfo));
+}

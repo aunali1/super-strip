@@ -92,6 +92,22 @@ extern int elfrw_read_Phdrs(FILE *fp, Elf64_Phdr *in, int count);
 extern int elfrw_read_Dyns(FILE *fp, Elf64_Dyn *in, int count);
 
 /*
+ * The count functions. These simply take a file size (in bytes) of a
+ * specific ELF section, and return the number of ELF structures that
+ * it can contain.
+ *
+ * The ELF standard omits storing the number of entries in a couple of
+ * sections, allowing it to be implicitly specified by the section's
+ * file size. This is inconvenient for code using this library, since
+ * ideally it shouldn't need to know the size of the ELF structs in
+ * the file. These function help cover that omission.
+ */
+
+extern int elfrw_count_Syms(int size);
+extern int elfrw_count_Syminfos(int size);
+extern int elfrw_count_Dyns(int size);
+
+/*
  * The file writing functions. After initialization, the elfrw library
  * functions can be used to write parts of ELF files of that flavor.
  * The library will accept 64-bit ELF structures with the native
