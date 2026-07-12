@@ -82,3 +82,8 @@ int elfrw_write_Dyns(FILE *fp, Elf64_Dyn const *out, int count)
 	    break;
     return i;
 }
+
+int elfrw_count_Dyns(int size)
+{
+    return size / (is64bit_form() ? sizeof(Elf64_Dyn) : sizeof(Elf32_Dyn));
+}
